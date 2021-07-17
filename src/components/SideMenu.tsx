@@ -46,7 +46,7 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
               backgroundImage: logo && `url('${logo}')`,
             }}
           />
-          <h1>{title}</h1>
+          <h1 className="__dumi-default-layout-hero">{title}</h1>
           <p>{description}</p>
           {/* github star badge */}
           {/github\.com/.test(repoUrl) && mode === 'doc' && (
