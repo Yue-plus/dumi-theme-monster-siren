@@ -31,7 +31,7 @@ const Navbar: FC<INavbarProps> = ({ onMobileMenuClick, navPrefix, location, dark
         to={base}
         data-plaintext={logo === false || undefined}
       >
-        {title}
+        {logo ? "" : title}
       </Link>
       <nav>
         {navPrefix}

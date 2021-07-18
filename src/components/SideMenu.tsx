@@ -61,7 +61,13 @@ const SideMenu: FC<INavbarProps> = ({ mobileMenuCollapsed, location, darkPrefix 
         </div>
         {/* mobile nav list */}
 
-        <div className="__dumi-default-menu-mobile-area">
+        <div
+          className="__dumi-default-menu-mobile-area"
+          style={{
+            //暂时不显示配色切换工具
+            display: "none"
+          }}
+        >
           {!!navItems.length && (
             <ul className="__dumi-default-menu-nav-list">
               {navItems.map(nav => {

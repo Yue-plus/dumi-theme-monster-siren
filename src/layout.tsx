@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import type { IRouteComponentProps } from '@umijs/types';
-import { context, Link } from 'dumi/theme';
+import { context, Link, usePrefersColor } from 'dumi/theme';
 import Navbar from './components/Navbar';
 import SideMenu from './components/SideMenu';
 import SlugList from './components/SlugList';
@@ -8,7 +8,12 @@ import SearchBar from './components/SearchBar';
 import Dark from './components/Dark';
 import './style/layout.less';
 
-const Hero = hero => (
+const Hero = (hero: {
+  image: string | undefined;
+  title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
+  desc: any;
+  actions: any[];
+}) => (
   <>
     <div className="__dumi-default-layout-hero">
       {hero.image && <img src={hero.image} />}
@@ -24,7 +29,7 @@ const Hero = hero => (
   </>
 );
 
-const Features = features => (
+const Features = (features: any[]) => (
   <div className="__dumi-default-layout-features">
     {features.map(feat => (
       <dl key={feat.title} style={{ backgroundImage: feat.icon ? `url(${feat.icon})` : undefined }}>
@@ -50,6 +55,11 @@ const Layout: React.FC<IRouteComponentProps> = ({ children, location }) => {
   } = useContext(context);
   const { url: repoUrl, branch, platform } = repository;
   const [menuCollapsed, setMenuCollapsed] = useState<boolean>(true);
+
+  // 仅限暗色
+  const [color, setColor] = usePrefersColor();
+  useEffect(() => setColor('dark'));
+
   const [darkSwitch, setDarkSwitch] = useState<boolean>(false);
   const isSiteMode = mode === 'site';
   const showHero = isSiteMode && meta.hero;
